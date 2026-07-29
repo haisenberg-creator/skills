@@ -1,6 +1,6 @@
 {
   "name": "mattpocock-skills",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Matt Pocock's agent skills for real engineering — grilling, spec/ticket flows, TDD, code review, domain modelling and more. Plug-and-play, not vibe coding.",
   "author": {
     "name": "Matt Pocock",
@@ -31,11 +31,13 @@
     "./skills/engineering/wayfinder",
     "./skills/engineering/implement",
     "./skills/engineering/prototype",
+    "./skills/engineering/precision-prototype",
     "./skills/engineering/research",
     "./skills/engineering/domain-modeling",
     "./skills/engineering/codebase-design",
     "./skills/engineering/code-review",
     "./skills/engineering/resolving-merge-conflicts",
+    "./skills/engineering/commit-and-push",
     "./skills/productivity/grill-me",
     "./skills/productivity/grilling",
     "./skills/productivity/handoff",

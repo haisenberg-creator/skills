@@ -7,7 +7,10 @@ Generate a foundational design system to lock in the aesthetic rules before writ
 
 1. **Mode Selection**
    Ask the user to choose an operation mode, waiting for their response before continuing:
-   - _Search/Auto Mode_: You will analyze the project domain and recommend a tailored design pattern, color palette, and typography.
+   - _Search/Auto Mode_: Query the vendored Design Intelligence Database for domain-tailored UI styles, color palettes, typography, and UX guidelines.
+     - Primary execution: Run Python BM25 search: `python3 scripts/search.py "<domain or keyword>" --domain style` (or `--domain color`/`--domain typography`/`--domain stack`).
+     - Tool fallback: If Python 3 is unavailable, use `grep_search` or `view_file` directly on dataset CSV files under `data/` (`styles.csv`, `colors.csv`, `typography.csv`, `ux-guidelines.csv`, `stacks/`).
+     - Use search results to select a tailored design pattern, color palette, typography, and chart/UX guidelines.
    - _Manual Mode_: Accept specific ideas, reference sites, or existing brand guidelines from the user. If their request is vague or incomplete, invoke the `grilling` skill to interview them relentlessly (asking one question at a time) to extract exact details about their preferred aesthetic, colors, and typography until you reach a shared understanding.
      _Completion criterion: The user has explicitly selected a mode and provided any necessary context._
 

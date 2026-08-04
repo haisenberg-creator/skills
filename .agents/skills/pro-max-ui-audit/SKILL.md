@@ -18,6 +18,9 @@ You are the QA Inspector for the Pro Max UI/UX workflow. Your role is to perform
    - **Micro-animations:** Check that hover/active/focus transitions strictly follow the 150-300ms range.
    - **Responsive Breakpoints:** Verify explicit layout classes exist and do not break across Mobile (375px), Tablet (768px), and Desktop (1024px+).
    - **Semantic HTML & Touch Targets:** Ensure interactive elements are semantic (`<button>`, `<a>`, `<input>`) and meet minimum mobile touch targets (44x44px).
+   - **Audit Intelligence Lookup:** Cross-reference QA checks against `data/ux-guidelines.csv`, `data/react-performance.csv`, and `data/motion.csv`.
+     - Primary execution: `python skills/engineering/pro-max-design-system/scripts/search.py "<ux or performance issue>" --domain ux` (or `--domain motion`).
+     - Tool fallback: Use `grep_search` or `view_file` on `skills/engineering/pro-max-design-system/data/ux-guidelines.csv` if Python is unavailable.
 
 3. **Design System Token Fidelity**
    - Cross-reference every color, typography style, and shadow against `design_system_spec.md` or `index.css` tokens generated in Step 1 (`pro-max-design-system`).

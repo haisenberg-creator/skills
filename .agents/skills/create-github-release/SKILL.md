@@ -57,7 +57,10 @@ Interview the user to resolve all release details before taking action:
    - Confirm the build command to run (e.g., `npm run build`).
    - Confirm the path pattern of build artifacts to attach to the GitHub release.
 
-_Completion Criterion_: Target version tag, release visibility flag, build command, and artifact paths agreed upon with the user.
+4. **Git Sync & Commit Integration (`commit-and-push`)**:
+   - Ask the user if they want to run the `commit-and-push` skill to commit pending changes (including `CHANGELOG.md` updates) and sync with remote before publishing the GitHub release.
+
+_Completion Criterion_: Target version tag, release visibility flag, build command, artifact paths, and commit/push workflow agreed upon with the user.
 
 ---
 
@@ -87,8 +90,9 @@ _Completion Criterion_: Test and build commands complete with exit code 0, and e
    - **Breaking Changes** (if any)
 4. Present draft release notes to user for review/edits.
 5. If `CHANGELOG.md` exists in repository root, append the approved release notes section under the new version header.
+6. If agreed during the interview, invoke the `commit-and-push` skill to commit local changes and changelog updates to the remote repository.
 
-_Completion Criterion_: Release notes drafted, approved by user, and saved to temporary release notes file.
+_Completion Criterion_: Release notes drafted, approved by user, saved to temporary file, and committed/pushed if selected.
 
 ---
 

@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // Root of mp-skills repo (where this CLI is located)
-const REPO_ROOT = path.resolve(__dirname, '..');
-const SKILLS_DIR = path.join(REPO_ROOT, 'skills');
-const PRESETS_FILE = path.join(REPO_ROOT, 'presets.json');
+const REPO_ROOT = path.resolve(__dirname, "..");
+const SKILLS_DIR = path.join(REPO_ROOT, "skills");
+const PRESETS_FILE = path.join(REPO_ROOT, "presets.json");
 
 // Current Working Directory (where the user is running the command)
 const CWD = process.cwd();
-const TARGET_AGENTS_SKILLS_DIR = path.join(CWD, '.agents', 'skills');
-const TARGET_CONFIG_FILE = path.join(CWD, 'skills.json');
+const TARGET_AGENTS_SKILLS_DIR = path.join(CWD, ".agents", "skills");
+const TARGET_CONFIG_FILE = path.join(CWD, "skills.json");
 
 // Helper to locate a skill inside mp-skills/skills/ (handles nested category folders)
 function findSkillSourceDir(skillName) {
@@ -22,7 +22,10 @@ function findSkillSourceDir(skillName) {
     for (const entry of entries) {
       if (entry.isDirectory()) {
         const fullPath = path.join(dir, entry.name);
-        if (entry.name === skillName && fs.existsSync(path.join(fullPath, 'SKILL.md'))) {
+        if (
+          entry.name === skillName &&
+          fs.existsSync(path.join(fullPath, "SKILL.md"))
+        ) {
           return fullPath;
         }
         const nested = search(fullPath);
@@ -37,13 +40,16 @@ function findSkillSourceDir(skillName) {
 
 // Helper to update skills.json in target project
 function updateTargetSkillsJson(skillNames, presetName = null) {
-  let config = { skills: [] };
+  let config = { source: "haisenberg-creator/skills", skills: [] };
   if (fs.existsSync(TARGET_CONFIG_FILE)) {
     try {
-      config = JSON.parse(fs.readFileSync(TARGET_CONFIG_FILE, 'utf8'));
+      config = JSON.parse(fs.readFileSync(TARGET_CONFIG_FILE, "utf8"));
+      if (!config.source) config.source = "haisenberg-creator/skills";
       if (!Array.isArray(config.skills)) config.skills = [];
     } catch (e) {
-      console.warn(`Warning: Could not parse existing skills.json. Overwriting format.`);
+      console.warn(
+        `Warning: Could not parse existing skills.json. Overwriting format.`
+      );
     }
   }
 
@@ -57,7 +63,7 @@ function updateTargetSkillsJson(skillNames, presetName = null) {
     }
   }
 
-  fs.writeFileSync(TARGET_CONFIG_FILE, JSON.stringify(config, null, 2), 'utf8');
+  fs.writeFileSync(TARGET_CONFIG_FILE, JSON.stringify(config, null, 2), "utf8");
 }
 
 // Install a single skill by name
@@ -72,7 +78,9 @@ function installSkill(skillName) {
   fs.mkdirSync(destPath, { recursive: true });
   fs.cpSync(sourcePath, destPath, { recursive: true });
 
-  console.log(`✅ Installed skill "${skillName}" -> .agents/skills/${skillName}`);
+  console.log(
+    `✅ Installed skill "${skillName}" -> .agents/skills/${skillName}`
+  );
   return true;
 }
 
@@ -80,7 +88,12 @@ function installSkill(skillName) {
 const args = process.argv.slice(2);
 const command = args[0];
 
-if (!command || command === 'help' || command === '--help' || command === '-h') {
+if (
+  !command ||
+  command === "help" ||
+  command === "--help" ||
+  command === "-h"
+) {
   console.log(`
 Usage: my-skills <command> [options]
 
@@ -94,10 +107,12 @@ Commands:
   process.exit(0);
 }
 
-if (command === 'add') {
+if (command === "add") {
   const skillsToAdd = args.slice(1);
   if (skillsToAdd.length === 0) {
-    console.error('Error: Please specify at least one skill name to add. Example: my-skills add ask-matt tdd');
+    console.error(
+      "Error: Please specify at least one skill name to add. Example: my-skills add ask-matt tdd"
+    );
     process.exit(1);
   }
 
@@ -112,9 +127,9 @@ if (command === 'add') {
     updateTargetSkillsJson(installed);
     console.log(`\n🎉 Updated skills.json with installed skills!`);
   }
-} else if (command === 'init') {
+} else if (command === "init") {
   let presetName = null;
-  const presetIdx = args.indexOf('--preset');
+  const presetIdx = args.indexOf("--preset");
   if (presetIdx !== -1 && args[presetIdx + 1]) {
     presetName = args[presetIdx + 1];
   }
@@ -126,20 +141,30 @@ if (command === 'add') {
     }
     let presets = {};
     try {
-      presets = JSON.parse(fs.readFileSync(PRESETS_FILE, 'utf8'));
+      presets = JSON.parse(fs.readFileSync(PRESETS_FILE, "utf8"));
     } catch (e) {
       console.error(`❌ Could not parse presets.json: ${e.message}`);
       process.exit(1);
     }
 
     const skillsInPreset = presets[presetName];
-    if (!skillsInPreset || !Array.isArray(skillsInPreset) || skillsInPreset.length === 0) {
-      console.error(`❌ Preset "${presetName}" is not defined or is empty in presets.json.`);
-      console.log(`Available presets: ${Object.keys(presets).join(', ').trim() || '(none)'}`);
+    if (
+      !skillsInPreset ||
+      !Array.isArray(skillsInPreset) ||
+      skillsInPreset.length === 0
+    ) {
+      console.error(
+        `❌ Preset "${presetName}" is not defined or is empty in presets.json.`
+      );
+      console.log(
+        `Available presets: ${Object.keys(presets).join(", ").trim() || "(none)"}`
+      );
       process.exit(1);
     }
 
-    console.log(`Installing preset "${presetName}" (${skillsInPreset.length} skills)...`);
+    console.log(
+      `Installing preset "${presetName}" (${skillsInPreset.length} skills)...`
+    );
     const installed = [];
     for (const name of skillsInPreset) {
       if (installSkill(name)) {
@@ -152,9 +177,11 @@ if (command === 'add') {
     }
   } else if (fs.existsSync(TARGET_CONFIG_FILE)) {
     try {
-      const config = JSON.parse(fs.readFileSync(TARGET_CONFIG_FILE, 'utf8'));
+      const config = JSON.parse(fs.readFileSync(TARGET_CONFIG_FILE, "utf8"));
       if (Array.isArray(config.skills) && config.skills.length > 0) {
-        console.log(`Syncing ${config.skills.length} skills from skills.json...`);
+        console.log(
+          `Syncing ${config.skills.length} skills from skills.json...`
+        );
         for (const name of config.skills) {
           installSkill(name);
         }
@@ -171,9 +198,9 @@ if (command === 'add') {
   my-skills init                  Sync skills defined in an existing skills.json
 `);
   }
-} else if (command === 'update') {
+} else if (command === "update") {
   let presetName = null;
-  const presetIdx = args.indexOf('--preset');
+  const presetIdx = args.indexOf("--preset");
   if (presetIdx !== -1 && args[presetIdx + 1]) {
     presetName = args[presetIdx + 1];
   }
@@ -183,7 +210,7 @@ if (command === 'add') {
 
   if (fs.existsSync(TARGET_CONFIG_FILE)) {
     try {
-      const config = JSON.parse(fs.readFileSync(TARGET_CONFIG_FILE, 'utf8'));
+      const config = JSON.parse(fs.readFileSync(TARGET_CONFIG_FILE, "utf8"));
       if (Array.isArray(config.skills)) existingSkills = config.skills;
       if (config.preset) configPreset = config.preset;
     } catch (e) {
@@ -198,7 +225,7 @@ if (command === 'add') {
   if (targetPreset) {
     if (fs.existsSync(PRESETS_FILE)) {
       try {
-        const presets = JSON.parse(fs.readFileSync(PRESETS_FILE, 'utf8'));
+        const presets = JSON.parse(fs.readFileSync(PRESETS_FILE, "utf8"));
         const presetSkills = presets[targetPreset];
         if (Array.isArray(presetSkills)) {
           for (const s of presetSkills) {
@@ -209,17 +236,23 @@ if (command === 'add') {
           }
         }
       } catch (e) {
-        console.warn(`Warning: Could not read presets.json for preset "${targetPreset}".`);
+        console.warn(
+          `Warning: Could not read presets.json for preset "${targetPreset}".`
+        );
       }
     }
   }
 
   if (skillsToUpdate.length === 0) {
-    console.error(`❌ No skills found to update. Run "my-skills init --preset default" or "my-skills add <skill>" first.`);
+    console.error(
+      `❌ No skills found to update. Run "my-skills init --preset default" or "my-skills add <skill>" first.`
+    );
     process.exit(1);
   }
 
-  console.log(`🔄 Updating ${skillsToUpdate.length} skills in .agents/skills...`);
+  console.log(
+    `🔄 Updating ${skillsToUpdate.length} skills in .agents/skills...`
+  );
   let updatedCount = 0;
   for (const name of skillsToUpdate) {
     if (installSkill(name)) {
@@ -230,17 +263,19 @@ if (command === 'add') {
   updateTargetSkillsJson(skillsToUpdate, targetPreset);
 
   const presetInfo = targetPreset
-    ? ` (Preset: "${targetPreset}"${newSkillsFromPresetCount > 0 ? `, ${newSkillsFromPresetCount} new skill(s) added` : ''})`
-    : '';
-  console.log(`\n🎉 Successfully updated ${updatedCount} skill(s)${presetInfo}!`);
-} else if (command === 'list') {
+    ? ` (Preset: "${targetPreset}"${newSkillsFromPresetCount > 0 ? `, ${newSkillsFromPresetCount} new skill(s) added` : ""})`
+    : "";
+  console.log(
+    `\n🎉 Successfully updated ${updatedCount} skill(s)${presetInfo}!`
+  );
+} else if (command === "list") {
   console.log(`Available skills in ${REPO_ROOT}:`);
   function listSkills(dir) {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
     for (const entry of entries) {
       if (entry.isDirectory()) {
         const fullPath = path.join(dir, entry.name);
-        if (fs.existsSync(path.join(fullPath, 'SKILL.md'))) {
+        if (fs.existsSync(path.join(fullPath, "SKILL.md"))) {
           console.log(`  - ${entry.name}`);
         } else {
           listSkills(fullPath);
@@ -254,4 +289,3 @@ if (command === 'add') {
   console.log(`Run "my-skills help" for usage.`);
   process.exit(1);
 }
-

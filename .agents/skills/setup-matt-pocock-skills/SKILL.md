@@ -8,6 +8,7 @@ disable-model-invocation: true
 
 Scaffold the per-repo configuration that the engineering skills assume:
 
+- **Installed skills** — tracked in `skills.json` at the repo root
 - **Issue tracker** — where issues live (GitHub by default; local markdown is also supported out of the box)
 - **Triage labels** — the strings used for the five canonical triage roles
 - **Domain docs** — where `CONTEXT.md` and ADRs live, and the consumer rules for reading them
@@ -20,6 +21,8 @@ This is a prompt-driven skill, not a deterministic script. Explore, present what
 
 Look at the current repo to understand its starting state. Read whatever exists; don't assume:
 
+- `skills.json` and `skills-lock.json` at the repo root — check existing skills config or lockfiles
+- `.agents/skills/` and `.claude/skills/` directories — scan for installed skill subfolders containing `SKILL.md`
 - `git remote -v` and `.git/config` — is this a GitHub repo? Which one?
 - `AGENTS.md` and `CLAUDE.md` at the repo root — does either exist? Is there already an `## Agent skills` section in either?
 - `CONTEXT.md` and `CONTEXT-MAP.md` at the repo root
@@ -64,6 +67,7 @@ Offer **multi-context** — a root `CONTEXT-MAP.md` pointing to per-context `CON
 
 Show the user a draft of:
 
+- The `skills.json` file to create or merge at the repo root
 - The `## Agent skills` block to add to whichever of `CLAUDE.md` / `AGENTS.md` is being edited (see step 4 for selection rules)
 - The contents of `docs/agents/issue-tracker.md`, `docs/agents/domain.md`, and `docs/agents/triage-labels.md` (the last only when `triage` is installed)
 
@@ -71,7 +75,22 @@ Let them edit before writing.
 
 ### 4. Write
 
-**Pick the file to edit:**
+**Write or update `skills.json`:**
+
+At the repo root, create or safely merge `skills.json`.
+
+- Populate `skills` with the list of detected installed skill names (e.g. from `.agents/skills/`, `.claude/skills/`, and/or `skills-lock.json`).
+- If `skills.json` already exists, preserve its existing fields and merge newly detected skills without duplicates.
+- Structure:
+
+```json
+{
+  "source": "haisenberg-creator/skills",
+  "skills": ["ask-matt", "code-review", "setup-matt-pocock-skills"]
+}
+```
+
+**Pick the instruction file to edit:**
 
 - If `CLAUDE.md` exists, edit it.
 - Else if `AGENTS.md` exists, edit it.
@@ -85,6 +104,10 @@ The block:
 
 ```markdown
 ## Agent skills
+
+### Installed skills
+
+Tracked in `skills.json`.
 
 ### Issue tracker
 
@@ -113,4 +136,4 @@ For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch us
 
 ### 5. Done
 
-Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md` directly later — re-running this skill is only necessary if they want to switch issue trackers or restart from scratch.
+Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md` and `skills.json` directly later — re-running this skill is only necessary if they want to switch issue trackers or restart from scratch.

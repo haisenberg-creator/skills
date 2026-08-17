@@ -1,10 +1,10 @@
 ## What it does
 
-`setup-matt-pocock-skills` answers three questions about one repo — where issues live, what the triage labels are called, and where the domain docs sit — and records the answers as markdown files under `docs/agents/`.
+`setup-matt-pocock-skills` configures a repository for the engineering skills: it creates or syncs `skills.json` listing the installed skills, and records where issues live, what triage labels are called, and where domain docs sit under `docs/agents/`.
 
 Those files are the only thing that varies between repos. The skills themselves are identical everywhere; they read `docs/agents/issue-tracker.md` at run time and do what it says. That is why the set is not tied to GitHub, and why no skill file ever needs editing to point it somewhere else. Invoking it with "link the skills to a custom issue tracker" works with anything you can connect to programmatically, with zero changes to the skills.
 
-It is a prompt-driven skill, not a deterministic script. It reads your `git remote`, your existing `CLAUDE.md`, your existing `CONTEXT.md`, proposes what it found, and waits for you to confirm before writing anything.
+It is a prompt-driven skill, not a deterministic script. It reads your installed skills, your `git remote`, your existing `CLAUDE.md`, your existing `CONTEXT.md`, proposes what it found, and waits for you to confirm before writing anything.
 
 ## When to reach for it
 
@@ -18,12 +18,13 @@ It writes into the repo you run it in:
 
 | It writes                  | Where                                                     |
 | -------------------------- | --------------------------------------------------------- |
+| `skills.json`              | repo root                                                 |
 | `issue-tracker.md`         | `docs/agents/`                                            |
 | `domain.md`                | `docs/agents/`                                            |
 | `triage-labels.md`         | `docs/agents/`, only when the `triage` skill is installed |
 | An `## Agent skills` block | whichever of `CLAUDE.md` / `AGENTS.md` already exists     |
 
-All of it is committed markdown. There is no user-level or global mode: the config lives in the repo, so every repo gets its own copy.
+All of it is committed markdown and JSON. There is no user-level or global mode: the config lives in the repo, so every repo gets its own copy.
 
 ## The three decisions
 
@@ -83,8 +84,9 @@ One long-standing complaint says yes, in these words: _"having a skill to set up
 
 ## It's working if
 
+- `skills.json` exists at the repo root listing the installed skills.
 - `docs/agents/issue-tracker.md` and `docs/agents/domain.md` exist, plus `triage-labels.md` if `triage` is installed.
-- An `## Agent skills` section appears in the instruction file your harness actually reads, with a one-line summary pointing at each of those files.
+- An `## Agent skills` section appears in the instruction file your harness actually reads, with a one-line summary pointing at `skills.json` and each of those doc files.
 - The tracker it proposed matches the remote you really use, and the label strings match labels that really exist in your tracker.
 - Afterwards, `/to-tickets` publishes without asking you where issues live, and `/triage` applies labels rather than inventing them.
 - Nothing in the skill files themselves changed. If setup edited a `SKILL.md`, something went wrong.

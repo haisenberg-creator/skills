@@ -1,4 +1,4 @@
-﻿---
+---
 name: execute-tickets
 description: Autonomous orchestrator that chews through a batch of tickets by dispatching sub-agents. Use this after /to-tickets has published the work.
 disable-model-invocation: true

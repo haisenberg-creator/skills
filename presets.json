@@ -20,10 +20,6 @@
     "loop-me",
     "migrate-to-shoehorn",
     "precision-prototype",
-    "pro-max-assets",
-    "pro-max-design-system",
-    "pro-max-ui-audit",
-    "pro-max-ui-builder",
     "prototype",
     "research",
     "resolving-merge-conflicts",
@@ -46,5 +42,12 @@
     "writing-for-agents",
     "writing-fragments",
     "writing-shape"
+  ],
+  "design": [
+    "taste-skill",
+    "redesign-skill",
+    "emil-design-eng",
+    "visual-prototype",
+    "pick-ui-library"
   ]
 }

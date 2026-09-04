@@ -84,6 +84,17 @@ function installSkill(skillName) {
   return true;
 }
 
+// Sync rules from repo to target project
+function syncRules() {
+  const sourceRules = path.join(REPO_ROOT, ".agents", "rules");
+  const targetRules = path.join(CWD, ".agents", "rules");
+  if (fs.existsSync(sourceRules)) {
+    fs.mkdirSync(targetRules, { recursive: true });
+    fs.cpSync(sourceRules, targetRules, { recursive: true });
+    console.log(`✅ Synced workspace rules -> .agents/rules`);
+  }
+}
+
 // CLI Command implementations
 const args = process.argv.slice(2);
 const command = args[0];
@@ -125,6 +136,7 @@ if (command === "add") {
 
   if (installed.length > 0) {
     updateTargetSkillsJson(installed);
+    syncRules();
     console.log(`\n🎉 Updated skills.json with installed skills!`);
   }
 } else if (command === "init") {
@@ -173,6 +185,7 @@ if (command === "add") {
     }
     if (installed.length > 0) {
       updateTargetSkillsJson(installed, presetName);
+      syncRules();
       console.log(`\n🎉 Preset "${presetName}" successfully installed!`);
     }
   } else if (fs.existsSync(TARGET_CONFIG_FILE)) {
@@ -185,6 +198,7 @@ if (command === "add") {
         for (const name of config.skills) {
           installSkill(name);
         }
+        syncRules();
         console.log(`\n🎉 All skills synced from skills.json!`);
       } else {
         console.log(`skills.json found, but no skills are listed in it.`);
@@ -261,6 +275,7 @@ if (command === "add") {
   }
 
   updateTargetSkillsJson(skillsToUpdate, targetPreset);
+  syncRules();
 
   const presetInfo = targetPreset
     ? ` (Preset: "${targetPreset}"${newSkillsFromPresetCount > 0 ? `, ${newSkillsFromPresetCount} new skill(s) added` : ""})`

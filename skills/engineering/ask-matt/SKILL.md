@@ -70,6 +70,16 @@ A **phase** is a chunk of work inside a session: the grilling, the implementatio
 
 Read [PHASE-BOUNDARIES.md](PHASE-BOUNDARIES.md) for the ordered tree: the five questions, the reasoning behind each branch, and why the primary-source cost makes **Continue** the one to rule out first. Make the decision **at** a boundary; mid-phase, continue or split the rest into subagents.
 
+## The Design Flow
+
+When the user asks to build UI/UX or explore frontend design, route them through the design preset skills instead of standard implementation:
+
+- **/taste-skill**: Sets the baseline anti-slop rules, variance dials, and aesthetics for an empty or new UI component.
+- **/pick-ui-library**: Helps select accessible, production-ready UI libraries instead of hand-rolling buggy components.
+- **/visual-prototype**: Used when the goal is purely visual. Generates 3 different variations of a UI component so the user can visually select their favorite.
+- **/emil-design-eng**: Runs during final execution to audit the produced UI and enforce micro-interaction physics (snappy easings, hover states, scale-downs).
+- **/redesign-skill**: Use this when the user brings an _existing_ but ugly UI component and asks to make it look premium.
+
 ## Standalone
 
 Off the main flow entirely.

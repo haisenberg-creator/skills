@@ -57,6 +57,8 @@ Each smell reads _what it is_ → _how to fix_; match it against the diff:
 
 ### 4. Spawn both sub-agents in parallel
 
+Where the harness supports model selection on sub-agent invocation (such as `Model: 'pro'` in Antigravity), explicitly dispatch both sub-agents on the frontier model (`pro`). This guarantees the code review is evaluated with high reasoning and critical skepticism, even if the parent session is running on a faster or lighter model like Gemini Flash.
+
 **Standards sub-agent prompt** should include:
 
 - The full diff command and commit list.

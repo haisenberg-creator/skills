@@ -17,14 +17,15 @@ You invoke this by typing `/execute-tickets` once your tickets have been publish
 
 1. Reads the tickets to determine the dependency graph.
 2. Identifies the **frontier** (all tickets whose blockers are completed).
-3. Spawns a sub-agent to implement the next ticket via `implement` (using TDD and committing).
-4. Marks the ticket as Done upon successful completion.
-5. Loops back to compute the next frontier until all tickets are done.
+3. Reads the **Required skills** field from the next ticket to determine its execution strategy.
+4. Spawns a sub-agent with a tailored prompt to execute the ticket (e.g., using `implement` with TDD, or `design-taste-frontend` and `emil-design-eng` for UI/UX, or `prototype` for exploratory design) and commit the work.
+5. Marks the ticket as Done upon successful completion.
+6. Loops back to compute the next frontier until all tickets are done.
 
 ## Where it fits
 
 `execute-tickets` bridges ticket planning with automated implementation:
 
 ```txt
-grill-with-docs → to-spec → to-tickets → execute-tickets (loops sub-agents with implement)
+grill-with-docs → to-spec → to-tickets → execute-tickets (loops sub-agents with required skills)
 ```

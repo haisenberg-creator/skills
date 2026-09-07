@@ -41,9 +41,13 @@ The edges are the point of the artifact. They read two ways depending on the tra
 
 The edges live in the ticket either way. The medium only decides whether anything can act on them in parallel. `to-tickets` produces the artifact; running it (one session at a time, or a fleet) is your job, not the skill's.
 
-## The wide-refactor exception
+## Exceptions to the tracer-bullet rule
 
-One shape breaks the tracer-bullet rule. A **wide refactor** is a single mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the whole codebase, so one edit breaks thousands of call sites and no vertical slice can land green.
+Two shapes break the tracer-bullet rule: **wide refactors** and **exploratory design**.
+
+### Wide refactors
+
+A **wide refactor** is a single mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the whole codebase, so one edit breaks thousands of call sites and no vertical slice can land green.
 
 `to-tickets` sequences that as **expand–contract** instead:
 
@@ -52,6 +56,10 @@ One shape breaks the tracer-bullet rule. A **wide refactor** is a single mechani
 - **Contract**: delete the old form once no caller remains, in a ticket blocked by every migrate batch.
 
 Where even the batches can't stay green alone, they share an integration branch and all block a final integrate-and-verify ticket. Green is promised only there.
+
+### Exploratory UI/UX design
+
+When a design isn't settled yet, the first ticket should not be a vertical slice. `to-tickets` outputs a **throwaway prototype** ticket first to test the feel before committing to production layers. Subsequent vertical slices (the actual implementation) are blocked by the completion and user approval of that prototype ticket.
 
 ## Common questions
 

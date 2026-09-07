@@ -30,13 +30,14 @@ Look at the current repo to understand its starting state. Read whatever exists;
 - `docs/agents/`: does this skill's prior output already exist?
 - `.scratch/`: a sign that a local-markdown issue tracker convention is already in use
 - Is the `triage` skill installed? (a `triage` skill folder alongside this one, or `triage` in your available skills.) This decides whether Section B runs at all.
+- Are any UI/UX design skills installed? (e.g. `taste-skill`, `redesign-skill`, `emil-design-eng`, `visual-prototype`, `pick-ui-library` in `skills.json` or `.agents/skills/`). This decides whether Section D runs.
 - Monorepo signals: a `pnpm-workspace.yaml`, a `workspaces` field in `package.json`, or a populated `packages/*` with its own `src/`. These are present only in a genuinely large multi-package repo; their absence means single-context, which is almost every repo.
 
 ### 2. Present findings and ask
 
 Summarise what's present and what's missing. Then take the sections in order. One section, one answer, then the next.
 
-Lead each section with the recommended answer so the user can accept it in a word. Give a one-line explainer only when the choice genuinely branches; skip the section entirely when exploration already settled it (Section B when `triage` isn't installed, Section C when there's no monorepo).
+Lead each section with the recommended answer so the user can accept it in a word. Give a one-line explainer only when the choice genuinely branches; skip the section entirely when exploration already settled it (Section B when `triage` isn't installed, Section C when there's no monorepo, Section D when no design skills are installed).
 
 **Section A: Issue tracker.**
 
@@ -63,6 +64,13 @@ The defaults are the five canonical roles, each label string equal to its name: 
 
 Offer **multi-context** (a root `CONTEXT-MAP.md` pointing to per-context `CONTEXT.md` files) only when exploration found monorepo signals. Then confirm which layout they want.
 
+**Section D: UI/UX design system.** Skip this section entirely if no design skills are installed (exploration told you).
+
+When design skills are present, automatically configure the Pro Max design rule. Write it without asking:
+
+- Scaffold `.agents/rules/pro-max-design.md` from `pro-max-design.template.md`.
+- Add a pointer in `AGENTS.md` / `CLAUDE.md` under `## Agent skills` directing UI work to that rule.
+
 ### 3. Confirm and edit
 
 Show the user a draft of:
@@ -70,6 +78,7 @@ Show the user a draft of:
 - The `skills.json` file to create or merge at the repo root
 - The `## Agent skills` block to add to whichever of `CLAUDE.md` / `AGENTS.md` is being edited (see step 4 for selection rules)
 - The contents of `docs/agents/issue-tracker.md`, `docs/agents/domain.md`, and `docs/agents/triage-labels.md` (the last only when `triage` is installed)
+- The `.agents/rules/pro-max-design.md` rule file to write from `pro-max-design.template.md` (only when design skills are installed)
 
 Let them edit before writing.
 
@@ -120,17 +129,23 @@ Tracked in `skills.json`.
 ### Domain docs
 
 [one-line summary of layout: "single-context" or "multi-context"]. See `docs/agents/domain.md`.
+
+### UI/UX design
+
+When designing, modifying, or creating UI components, adhere to the Pro Max design rules in `.agents/rules/pro-max-design.md`.
 ```
 
 Include the `### Triage labels` sub-block, and write `docs/agents/triage-labels.md`, only when `triage` is installed and Section B ran. When it isn't, both are omitted.
+Include the `### UI/UX design` sub-block, and write `.agents/rules/pro-max-design.md`, only when design skills are installed and Section D ran. When they aren't, both are omitted.
 
-Then write the docs files using the seed templates in this skill folder as a starting point:
+Then write the docs and rules files using the seed templates in this skill folder as a starting point:
 
 - [issue-tracker-github.md](./issue-tracker-github.md): GitHub issue tracker
 - [issue-tracker-gitlab.md](./issue-tracker-gitlab.md): GitLab issue tracker
 - [issue-tracker-local.md](./issue-tracker-local.md): local-markdown issue tracker
 - [triage-labels.md](./triage-labels.md): label mapping (only if `triage` is installed)
 - [domain.md](./domain.md): domain doc consumer rules + layout
+- [pro-max-design.template.md](./pro-max-design.template.md): Pro Max design system rule (only if design skills are installed, written to `.agents/rules/pro-max-design.md`)
 
 For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description.
 

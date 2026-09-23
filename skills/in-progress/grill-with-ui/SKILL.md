@@ -1,6 +1,6 @@
 ---
 name: grill-with-ui
-description: "Run a grilling interview on a local browser page instead of the terminal. Every question is laid out with its recommendation, answerable in any order, with a per-question discussion thread and one Send to Agent button."
+description: "Run a grilling interview on a local browser page instead of the terminal."
 argument-hint: "<topic>"
 disable-model-invocation: true
 ---

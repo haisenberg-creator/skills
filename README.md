@@ -204,7 +204,7 @@ Skills I use daily for code work.
 **Model-invoked**
 
 - **[prototype](./skills/engineering/prototype/SKILL.md)**: Build a throwaway prototype to answer a design question, either a single shareable HTML file for state/logic questions, or several radically different UI variations toggleable from one route.
-- **[precision-prototype](./skills/engineering/precision-prototype/SKILL.md)**: Build a single, highly-detailed throwaway prototype after relentlessly interviewing the user about exact dimensions, scale, position, and control functions.
+- **[precision-prototype](./skills/engineering/precision-prototype/SKILL.md)**: Build a single, highly-detailed prototype workbench with custom viewports, live in-canvas sync, and bake-to-code persistence after relentlessly interviewing the user.
 - **[diagnosing-bugs](./skills/engineering/diagnosing-bugs/SKILL.md)**: Disciplined diagnosis loop for hard bugs and performance regressions: build a feedback loop that goes red on this bug → minimise → hypothesise → instrument → fix → regression-test.
 - **[research](./skills/engineering/research/SKILL.md)**: Investigate a question against high-trust primary sources and capture the findings as a cited Markdown file in the repo, run as a background agent.
 - **[tdd](./skills/engineering/tdd/SKILL.md)**: Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.

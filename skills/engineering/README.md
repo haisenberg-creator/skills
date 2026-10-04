@@ -22,7 +22,7 @@ Reachable only when you type them (Claude Code: `disable-model-invocation: true`
 Model- or user-reachable (rich trigger phrasing so the model can reach for them).
 
 - **[prototype](./prototype/SKILL.md)**: Build a throwaway prototype to answer a design question: a single shareable HTML file for state/logic, or several toggleable UI variations.
-- **[precision-prototype](./precision-prototype/SKILL.md)**: Build a single, highly-detailed throwaway prototype after relentlessly interviewing the user about exact dimensions, scale, position, and control functions.
+- **[precision-prototype](./precision-prototype/SKILL.md)**: Build a single, highly-detailed prototype workbench with custom viewports, live in-canvas sync, and bake-to-code persistence after relentlessly interviewing the user.
 - **[diagnosing-bugs](./diagnosing-bugs/SKILL.md)**: Disciplined diagnosis loop for hard bugs and performance regressions: build a feedback loop that goes red on this bug → minimise → hypothesise → instrument → fix → regression-test.
 - **[research](./research/SKILL.md)**: Investigate a question against high-trust primary sources and capture the findings as a cited Markdown file in the repo, run as a background agent.
 - **[tdd](./tdd/SKILL.md)**: Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.

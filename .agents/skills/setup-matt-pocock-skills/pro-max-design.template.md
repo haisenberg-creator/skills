@@ -5,9 +5,9 @@ trigger: "When generating or modifying UI, CSS, frontend components, layouts, or
 
 # Pro Max Design System: The Vibe Dictionary & Master Prompts
 
-Whenever you are tasked with designing or building UI/UX, you MUST first ask the user which of the 4 Master Aesthetics they want to use. DO NOT assume or default to one without asking.
+Whenever you are tasked with designing or building UI/UX, you MUST first ask the user which of the 5 Master Aesthetics they want to use, or if they prefer to provide a custom aesthetic (Option 6). DO NOT assume or default to one without asking.
 
-## 4 Master Prompts (Aesthetics)
+## 5 Master Prompts + Custom Aesthetic Option
 
 ### 1. Cinematic Landing Page
 
@@ -32,6 +32,19 @@ Whenever you are tasked with designing or building UI/UX, you MUST first ask the
 - **Role**: Act as an elite, Awwwards-winning Creative Frontend Developer and Avant-Garde UI/UX Art Director.
 - **Goal**: High-end architectural studio, editorial print magazine, raw materiality.
 - **Key Elements**: Strictly NO purple, blue, green, or neon colors. Exact Palette: #EAE6DF (Base), #F4F1EB (Surface), #1C1B1A (Text), #827C75 (Muted), #A84B2B (Accent). Fonts: Instrument Serif and Manrope. Apply global CSS filters to Unsplash images for earthy tones. Fixed SVG fractal noise overlay. Asymmetrical 12-column CSS grid featuring components like "The Tall Editorial", "The Dark Abstract Block", "The Detail Overlap", and "The Interactive List" with GSAP custom cursors and magnetic buttons.
+
+### 5. Utilitarian & Pragmatic Cockpit (High-Density Workstation)
+
+- **Role**: Act as a World-Class Systems UI/UX Architect and Ergonomics Engineer.
+- **Goal**: Build high-density, friction-free interfaces focused on maximum scan rate, data throughput, and zero cognitive overhead. Eradicate all decorative fluff (auroras, parallax, floating blobs, decorative glows).
+- **Key Elements**: Strict neutral monochrome base (Zinc/Slate `#09090b`, `#18181b`, `#27272a`, `#fafafa`). Semantic status indicators only (emerald, amber, rose) with no decorative gradients. Crisp 1px borders over soft shadows. Dense grid and table layouts with compact padding (4-8px micro-units). Typography: Clean grotesque (`Geist`, `Inter`) for headers and labels paired with monospaced tabular numbers (`JetBrains Mono`, `Geist Mono`, `tabular-nums`) for metrics and status. Snappy transitions (0-100ms or motion disabled).
+- **Badge Pill Option**: When this aesthetic is selected, explicitly ask the user whether they want to use badge pills in the UI or not (e.g., using badge pills for status and metadata vs. keeping it badge-free with plain text and simple indicator dots).
+
+### 6. Custom / Manual Aesthetic
+
+- **Role**: Act as a Versatile Senior UI/UX Designer and Frontend Architect adapting to user-specified aesthetic briefs or design systems.
+- **Goal**: Implement the custom vibe, brand language, or external design system specified by the user while enforcing core usability and engineering standards.
+- **Key Elements**: Prompt the user to provide their desired aesthetic description, reference links, color palette, or design system tokens. Enforce the strict technicals and anti-patterns from the Vibe Dictionary below (WCAG AA contrast, no generic AI purple/blue gradients, consistent 8px grid spacing, responsive layout, GPU-accelerated transitions).
 
 ---
 

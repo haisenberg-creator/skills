@@ -10,13 +10,13 @@ Type `/grilling`, or the [agent](https://www.aihero.dev/ai-coding-dictionary/age
 
 Typing `/grilling` directly gets you the plain interview and nothing else. Where you want something more than that:
 
-| What you have                                                            | Reach for                                                                                                                                                                 |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| You aren't working in a working directory                                | [grill-me](https://aihero.dev/skills-grill-me): the same [session](https://www.aihero.dev/ai-coding-dictionary/session), under a name the agent will never fire by itself |
-| You are in a working directory                                           | [grill-with-docs](https://aihero.dev/skills-grill-with-docs): the same session, and it writes `CONTEXT.md` and ADRs as it goes                                            |
-| An effort too big to hold in one session                                 | [wayfinder](https://aihero.dev/skills-wayfinder): it charts a map and runs grilling inside the decision tickets                                                           |
-| A question that talking cannot settle: how something should look or feel | [prototype](https://aihero.dev/skills-prototype): build the throwaway version, then come back                                                                             |
-| A skill of your own that needs an interview                              | Invoke `/grilling` from it, rather than writing another interview                                                                                                         |
+| What you have | Reach for |
+| --- | --- |
+| You aren't working in a working directory | [grill-me](https://aihero.dev/skills-grill-me): the same [session](https://www.aihero.dev/ai-coding-dictionary/session), under a name the agent will never fire by itself |
+| You are in a working directory | [grill-with-docs](https://aihero.dev/skills-grill-with-docs): the same session, and it writes `GLOSSARY.md` and ADRs as it goes |
+| An effort too big to hold in one session | [wayfinder](https://aihero.dev/skills-wayfinder): it charts a map and runs grilling inside the decision tickets |
+| A question that talking cannot settle: how something should look or feel | [prototype](https://aihero.dev/skills-prototype): build the throwaway version, then come back |
+| A skill of your own that needs an interview | Invoke `/grilling` from it, rather than writing another interview |
 
 ## The round, the frontier, and who decides
 
@@ -34,11 +34,11 @@ The honest limit: the frontier is the agent's judgement, not a computed graph. I
 
 This page covers the mechanism. The things people most often want are documented one level up.
 
-| Question                                                                                                          | Where it is answered                                         |
-| ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| The tree, the frontier, rounds, the question format, facts vs decisions                                           | Here                                                         |
-| How long a session should run, what to do with a question you can't answer by talking, how to avoid nodding along | [grill-me](https://aihero.dev/skills-grill-me)               |
-| What gets written to `CONTEXT.md`, what becomes an ADR                                                            | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
+| Question | Where it is answered |
+| --- | --- |
+| The tree, the frontier, rounds, the question format, facts vs decisions | Here |
+| How long a session should run, what to do with a question you can't answer by talking, how to avoid nodding along | [grill-me](https://aihero.dev/skills-grill-me) |
+| What gets written to `GLOSSARY.md`, what becomes an ADR | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
 
 ## Common questions
 

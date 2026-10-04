@@ -10,13 +10,13 @@ Type `/research`, or the [agent](https://www.aihero.dev/ai-coding-dictionary/age
 
 Reach for it when the next step is _finding something out_ from outside the working directory (how a third-party API behaves, what a spec actually says, whether a version claim holds), and you'd rather not stall your own thread doing the reading. What you need decides which skill:
 
-| What you need                                                       | Reach for                                                    |
-| ------------------------------------------------------------------- | ------------------------------------------------------------ |
-| An external fact a decision is waiting on                           | `research`                                                   |
-| A decision made _with_ you, by interview                            | [grilling](https://aihero.dev/skills-grilling)               |
-| A durable architecture decision, written into `CONTEXT.md` and ADRs | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
-| To find out whether an approach works in your codebase              | [prototype](https://aihero.dev/skills-prototype)             |
-| A plan too big to hold in one session                               | [wayfinder](https://aihero.dev/skills-wayfinder)             |
+| What you need | Reach for |
+| --- | --- |
+| An external fact a decision is waiting on | `research` |
+| A decision made *with* you, by interview | [grilling](https://aihero.dev/skills-grilling) |
+| A durable architecture decision, written into `GLOSSARY.md` and ADRs | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
+| To find out whether an approach works in your codebase | [prototype](https://aihero.dev/skills-prototype) |
+| A plan too big to hold in one session | [wayfinder](https://aihero.dev/skills-wayfinder) |
 
 The line between `research` and `grill-with-docs` is the **shelf life of what comes back**. Research produces short-lived assets: what this library's auth mechanism does as of this week. An ADR records a decision you keep. If what you are producing is a decision rather than a fact, you are [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling), not researching.
 

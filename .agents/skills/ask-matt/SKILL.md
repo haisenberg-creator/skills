@@ -72,13 +72,18 @@ Read [PHASE-BOUNDARIES.md](PHASE-BOUNDARIES.md) for the ordered tree: the five q
 
 ## The Design Flow
 
-When the user asks to build UI/UX or explore frontend design, route them through the design preset skills instead of standard implementation:
+When the user asks to build UI/UX, explore frontend design, or add rich motion, route them through the design preset skills instead of standard implementation:
 
+- **/impeccable**: Complete design intelligence engine with 24 commands (craft, critique, audit, polish, layout, bolder, quieter, distill). Creates durable PRODUCT.md truth and runs deterministic detectors.
+- **/landing-page-design**: End-to-end playbook for building high-converting marketing landing pages from scratch with structured intake questions, conversion copywriting, and calibrated design tokens.
+- **/build-awwwards-quality-sites**: Art-directs and builds distinctive, motion-rich, cinematic websites with GSAP choreography, smooth-scroll engines, and interactive moments.
+- **/video-to-superprompt**: Turns a screen recording or walkthrough video into a builder-ready recreation prompt.
 - **/taste-skill**: Sets the baseline anti-slop rules, variance dials, and aesthetics for an empty or new UI component.
-- **/pick-ui-library**: Helps select accessible, production-ready UI libraries instead of hand-rolling buggy components.
+- **/redesign-skill**: Use this when the user brings an existing, ugly UI component and asks to make it look premium without breaking markup or logic.
+- **/emil-design-eng**: Runs during final execution to polish components and enforce micro-interaction physics (snappy easings, hover states, scale-downs).
 - **/visual-prototype**: Used when the goal is purely visual. Generates 3 different variations of a UI component so the user can visually select their favorite.
-- **/emil-design-eng**: Runs during final execution to audit the produced UI and enforce micro-interaction physics (snappy easings, hover states, scale-downs).
-- **/redesign-skill**: Use this when the user brings an _existing_ but ugly UI component and asks to make it look premium.
+- **/pick-ui-library**: Helps select accessible, production-ready UI libraries instead of hand-rolling buggy components.
+- **Motion and 3D Primitives** (`/gsap`, `/animation-on-scroll`, `/progressive-blur`, `/threejs`, `/3d-ultra-realistic-water`, `/3d-underwater-god-rays`): Model-invoked visual tools that provide specific technical implementations when building or refining interfaces.
 
 ## Standalone
 

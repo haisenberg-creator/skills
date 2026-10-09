@@ -8,6 +8,8 @@ disable-model-invocation: true
 
 You don't remember every skill, so ask.
 
+Before stating what a skill does or recommending a step be skipped, read that skill's SKILL.md: the summaries here are for orientation only.
+
 A **flow** is a path through the skills. Most paths run along one **main flow**, and two **on-ramps** merge onto it. Everything else is standalone, or a vocabulary layer that runs underneath.
 
 ## The main flow: idea → ship
@@ -45,7 +47,7 @@ A starting situation that generates work, then merges onto the main flow.
 
   Triage is only for issues **you didn't create**: bug reports, incoming feature requests, anything that arrives raw. Tickets that `/to-tickets` produced are already agent-ready, so **don't triage them**.
 
-- **Something's broken** → **`/diagnosing-bugs`**. For the hard ones: the bug that resists a first glance, the intermittent flake, the regression that crept in between two known-good states. It refuses to theorise until it has a **tight feedback loop** (one command that already goes red on _this_ bug), then fixes with a regression test. Its post-mortem hands off to **`/improve-codebase-architecture`** when the real finding is that there's no good seam to lock the bug down.
+- **Something's broken** → **`/diagnosing-bugs`**. For the hard ones: the bug that resists a first glance, the intermittent flake, the regression that crept in between two known-good states. It refuses to theorise until it has a **tight feedback loop** (one command that already goes red on _this_ bug), then fixes with a regression test. Once the fix is in, run **`/retro`** in the same session to ask what would have prevented the bug; where the real finding is that there's no good seam to lock it down, that's a job for **`/improve-codebase-architecture`**.
 
 - **A huge, foggy effort: a greenfield project or a huge feature build, too big for one session** → **`/wayfinder`**, the most cognitively demanding flow here. When the way from here to the destination isn't visible yet, it charts a **shared map** of **decision tickets** on the issue tracker and resolves them one at a time, producing **decisions, not deliverables**, until the fog is pushed back and the way is clear. Where **`/grill-with-docs`** sharpens an idea you can hold in one session, wayfinder is for the idea you can't, and it's slower and denser, so save it for exactly that, never a well-scoped feature.
 
@@ -61,8 +63,8 @@ Not feature work, just upkeep.
 
 Two model-invoked references that run _beneath_ the other skills, each the single source of truth for its vocabulary. Reach for them directly when the **words**, not the process, are the problem; or let the skills above pull them in.
 
-- **`/domain-modeling`**: sharpen the project's *domain* language: challenge a fuzzy term, resolve an overloaded word ("account" doing three jobs), record a hard-to-reverse decision as an ADR. It's the active discipline `/grill-with-docs` drives to keep `GLOSSARY.md` a clean glossary.
-- **`/codebase-design`** is the deep-module vocabulary (module, interface, depth, seam, adapter, leverage, locality) for designing a module's *shape*: a lot of behaviour behind a small interface at a clean seam. `/tdd` and `/improve-codebase-architecture` both speak it.
+- **`/domain-modeling`**: sharpen the project's _domain_ language: challenge a fuzzy term, resolve an overloaded word ("account" doing three jobs), record a hard-to-reverse decision as an ADR. It's the active discipline `/grill-with-docs` drives to keep `GLOSSARY.md` a clean glossary.
+- **`/codebase-design`** is the deep-module vocabulary (module, interface, depth, seam, adapter, leverage, locality) for designing a module's _shape_: a lot of behaviour behind a small interface at a clean seam. `/tdd` and `/improve-codebase-architecture` both speak it.
 
 ## Phase boundaries
 
@@ -78,13 +80,18 @@ Read [PHASE-BOUNDARIES.md](PHASE-BOUNDARIES.md) for the ordered tree: the five q
 
 ## The Design Flow
 
-When the user asks to build UI/UX or explore frontend design, route them through the design preset skills instead of standard implementation:
+When the user asks to build UI/UX, explore frontend design, or add rich motion, route them through the design preset skills instead of standard implementation:
 
+- **/impeccable**: Complete design intelligence engine with 24 commands (craft, critique, audit, polish, layout, bolder, quieter, distill). Creates durable PRODUCT.md truth and runs deterministic detectors.
+- **/landing-page-design**: End-to-end playbook for building high-converting marketing landing pages from scratch with structured intake questions, conversion copywriting, and calibrated design tokens.
+- **/build-awwwards-quality-sites**: Art-directs and builds distinctive, motion-rich, cinematic websites with GSAP choreography, smooth-scroll engines, and interactive moments.
+- **/video-to-superprompt**: Turns a screen recording or walkthrough video into a builder-ready recreation prompt.
 - **/taste-skill**: Sets the baseline anti-slop rules, variance dials, and aesthetics for an empty or new UI component.
-- **/pick-ui-library**: Helps select accessible, production-ready UI libraries instead of hand-rolling buggy components.
+- **/redesign-skill**: Use this when the user brings an existing, ugly UI component and asks to make it look premium without breaking markup or logic.
+- **/emil-design-eng**: Runs during final execution to polish components and enforce micro-interaction physics (snappy easings, hover states, scale-downs).
 - **/visual-prototype**: Used when the goal is purely visual. Generates 3 different variations of a UI component so the user can visually select their favorite.
-- **/emil-design-eng**: Runs during final execution to audit the produced UI and enforce micro-interaction physics (snappy easings, hover states, scale-downs).
-- **/redesign-skill**: Use this when the user brings an _existing_ but ugly UI component and asks to make it look premium.
+- **/pick-ui-library**: Helps select accessible, production-ready UI libraries instead of hand-rolling buggy components.
+- **Motion and 3D Primitives** (`/gsap`, `/animation-on-scroll`, `/progressive-blur`, `/threejs`, `/3d-ultra-realistic-water`, `/3d-underwater-god-rays`): Model-invoked visual tools that provide specific technical implementations when building or refining interfaces.
 
 ## Standalone
 

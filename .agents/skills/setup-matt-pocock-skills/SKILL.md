@@ -28,9 +28,10 @@ Look at the current repo to understand its starting state. Read whatever exists;
 - `GLOSSARY.md` and `GLOSSARY-MAP.md` at the repo root
 - `docs/adr/` and any `src/*/docs/adr/` directories
 - `docs/agents/`: does this skill's prior output already exist?
+- `.agents/rules/pro-max-design.md`: does a design rule already exist? Is it up to date with `pro-max-design.template.md`?
 - `.scratch/`: a sign that a local-markdown issue tracker convention is already in use
 - Is the `triage` skill installed? (a `triage` skill folder alongside this one, or `triage` in your available skills.) This decides whether Section B runs at all.
-- Are any UI/UX design skills installed? (e.g. `taste-skill`, `redesign-skill`, `emil-design-eng`, `visual-prototype`, `pick-ui-library` in `skills.json` or `.agents/skills/`). This decides whether Section D runs.
+- Are any UI/UX design skills installed? (e.g. `taste-skill`, `redesign-skill`, `emil-design-eng`, `visual-prototype`, `pick-ui-library`, `impeccable`, `landing-page-design`, or other skills in the design preset). This decides whether Section D runs.
 - Monorepo signals: a `pnpm-workspace.yaml`, a `workspaces` field in `package.json`, or a populated `packages/*` with its own `src/`. These are present only in a genuinely large multi-package repo; their absence means single-context, which is almost every repo.
 
 ### 2. Present findings and ask
@@ -66,19 +67,19 @@ Offer **multi-context** (a root `GLOSSARY-MAP.md` pointing to per-context `GLOSS
 
 **Section D: UI/UX design system.** Skip this section entirely if no design skills are installed (exploration told you).
 
-When design skills are present, automatically configure the Pro Max design rule. Write it without asking:
+When design skills are present, automatically configure or update the Pro Max design rule. Write or update it without asking:
 
-- Scaffold `.agents/rules/pro-max-design.md` from `pro-max-design.template.md`.
-- Add a pointer in `AGENTS.md` / `CLAUDE.md` under `## Agent skills` directing UI work to that rule.
+- Scaffold or update `.agents/rules/pro-max-design.md` from `pro-max-design.template.md`. If the rule already exists, update/refresh it to match the latest template so that newly added Master Aesthetics (e.g. Utilitarian & Pragmatic Cockpit, Custom/Manual Aesthetic) and Vibe Dictionary directives are refreshed.
+- Add or update a pointer in `AGENTS.md` / `CLAUDE.md` under `## Agent skills` directing UI work to that rule.
 
 ### 3. Confirm and edit
 
 Show the user a draft of:
 
 - The `skills.json` file to create or merge at the repo root
-- The `## Agent skills` block to add to whichever of `CLAUDE.md` / `AGENTS.md` is being edited (see step 4 for selection rules)
+- The `## Agent skills` block to add or update in whichever of `CLAUDE.md` / `AGENTS.md` is being edited (see step 4 for selection rules)
 - The contents of `docs/agents/issue-tracker.md`, `docs/agents/domain.md`, and `docs/agents/triage-labels.md` (the last only when `triage` is installed)
-- The `.agents/rules/pro-max-design.md` rule file to write from `pro-max-design.template.md` (only when design skills are installed)
+- The `.agents/rules/pro-max-design.md` rule file to write or update from `pro-max-design.template.md` (only when design skills are installed)
 
 Let them edit before writing.
 
@@ -136,19 +137,21 @@ When designing, modifying, or creating UI components, adhere to the Pro Max desi
 ```
 
 Include the `### Triage labels` sub-block, and write `docs/agents/triage-labels.md`, only when `triage` is installed and Section B ran. When it isn't, both are omitted.
-Include the `### UI/UX design` sub-block, and write `.agents/rules/pro-max-design.md`, only when design skills are installed and Section D ran. When they aren't, both are omitted.
+Include the `### UI/UX design` sub-block, and write or update `.agents/rules/pro-max-design.md`, only when design skills are installed and Section D ran. When they aren't, both are omitted.
 
-Then write the docs and rules files using the seed templates in this skill folder as a starting point:
+When Section B ran on GitHub or GitLab, create each configured label the tracker lacks (`gh label create` / `glab label create`).
+
+Then write or update the docs and rules files using the seed templates in this skill folder as a starting point:
 
 - [issue-tracker-github.md](./issue-tracker-github.md): GitHub issue tracker
 - [issue-tracker-gitlab.md](./issue-tracker-gitlab.md): GitLab issue tracker
 - [issue-tracker-local.md](./issue-tracker-local.md): local-markdown issue tracker
 - [triage-labels.md](./triage-labels.md): label mapping (only if `triage` is installed)
 - [domain.md](./domain.md): domain doc consumer rules + layout
-- [pro-max-design.template.md](./pro-max-design.template.md): Pro Max design system rule (only if design skills are installed, written to `.agents/rules/pro-max-design.md`)
+- [pro-max-design.template.md](./pro-max-design.template.md): Pro Max design system rule (only if design skills are installed, written or updated to `.agents/rules/pro-max-design.md`)
 
 For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description.
 
 ### 5. Done
 
-Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md` and `skills.json` directly later; re-running this skill is only necessary if they want to switch issue trackers or restart from scratch.
+Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md`, `.agents/rules/pro-max-design.md`, and `skills.json` directly later; re-running this skill refreshes `docs/agents/`, updates `.agents/rules/pro-max-design.md` to match the latest template, or lets them switch issue trackers.

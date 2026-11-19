@@ -1,0 +1,3 @@
+interface:
+  display_name: "Setup Guardrails"
+  short_description: "Install the shared ESLint guardrail baseline, pre-commit hook, and AGENTS.md rule table"

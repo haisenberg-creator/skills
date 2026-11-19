@@ -12,9 +12,9 @@ The issue tracker and triage label vocabulary should have been provided to you. 
 
 1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's domain glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching.
 
-2. Sketch out the seams at which you're going to test the feature. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better - the ideal number is one.
+2. Call the Skill tool with "verification-tiers" to pick the verification tier and test budget, and sketch out the seams at which you're going to test the feature. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better - the ideal number is one.
 
-Check with the user that these seams match their expectations.
+Check with the user that the verification tier, browser proof, and seams match their expectations.
 
 3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
 
@@ -60,9 +60,12 @@ Exception: if a prototype produced a snippet that encodes a decision more precis
 
 A list of testing decisions that were made. Include:
 
+- The **Verification tier** (`tier 1 (runtime-only)`, `tier 2 (regression)`, or `tier 3 (seam)`) and its test budget
+- The observable browser **Done proof** and target Playwright **Journey**
 - A description of what makes a good test (only test external behavior, not implementation details)
-- Which modules will be tested
+- Which modules and seams will be tested
 - Prior art for the tests (i.e. similar types of tests in the codebase)
+- An optional Mermaid `stateDiagram` when the flow has async steps or more than three user-facing UI states (loading, empty, error, success, edge cases)
 
 ## Out of Scope
 

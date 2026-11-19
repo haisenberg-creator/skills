@@ -1,0 +1,3 @@
+interface:
+  display_name: "Verification Tiers"
+  short_description: "Enforce the 3-tier test budget and Playwright journey verification contract"

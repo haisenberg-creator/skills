@@ -51,7 +51,11 @@ export const guardrailConfigs = [
       parser: tseslint.parser,
       parserOptions: {
         projectService: {
-          allowDefaultProject: ["*.config.ts", "*.config.mts", "e2e/*.ts"],
+          allowDefaultProject: [
+            "playwright.config.ts",
+            "playwright.config.mts",
+            "e2e/*.ts",
+          ],
         },
       },
     },

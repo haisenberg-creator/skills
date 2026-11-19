@@ -1,0 +1,3 @@
+interface:
+  display_name: "Verify Web App"
+  short_description: "Run or bootstrap the Feature map and Playwright Journey with zero-error and screenshot proof"

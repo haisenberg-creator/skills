@@ -34,6 +34,14 @@ export const guardrailConfigs = [
   {
     name: "guardrails/base",
     files: ["**/*.{ts,tsx}"],
+    ignores: [
+      "dist/**",
+      "build/**",
+      ".next/**",
+      "coverage/**",
+      "node_modules/**",
+      "src-tauri/**",
+    ],
     plugins: {
       "@typescript-eslint": tseslint.plugin,
       "react-hooks": reactHooks,
@@ -42,7 +50,9 @@ export const guardrailConfigs = [
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
-        projectService: true,
+        projectService: {
+          allowDefaultProject: ["*.config.ts", "*.config.mts", "e2e/*.ts"],
+        },
       },
     },
     rules: {

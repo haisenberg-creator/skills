@@ -18,9 +18,9 @@ Look for `e2e/features/README.md` in the target app.
 
 Interview the repo before asking the user:
 
-1. **Inspect startup**: read `package.json`, `.env*`, and framework configs (`vite.config.*`, `next.config.*`) to identify the dev server command, port, and required seed/auth setup.
+1. **Inspect startup**: read `package.json`, `.env*`, and framework configs (`vite.config.*`, `next.config.*`) to identify the dev server command, port, and required seed/auth setup. Framework config (`vite.config.*` `server.port`, `package.json` dev script) overrides stale `.env` or `README.md` port docs.
 2. **Install Playwright**: if `@playwright/test` is not in `package.json`, install it as a devDependency and ensure Chromium is available (`npx playwright install chromium`).
-3. **Configure Playwright**: create or update `playwright.config.ts` at the app root with:
+3. **Configure Playwright**: if `playwright.config.*` or `e2e/*.spec.ts` already exists (brownfield repo), inspect and preserve them instead of overwriting. Otherwise create `playwright.config.ts` at the app root with:
    - `testDir: './e2e'`
    - `use.baseURL` set to the local dev URL
    - `webServer` set to the app's dev command, `url` set to the local dev URL, and `reuseExistingServer: !process.env.CI`
@@ -47,7 +47,7 @@ For the feature named in the ticket's `journey:` (or the affected feature in `e2
    - **Real user path**: drive the UI via stable handles (`getByRole`, `getByLabel`, `getByText`, `getByTestId`, and route URLs), never internal state setters.
    - **Action and resulting state**: assert the observable outcome required by `proof:` (DOM state, URL, persisted data after reload, or network response).
    - **Evidence capture**: save a screenshot of the verified end state to `e2e/.evidence/<feature>.png` using `await page.screenshot({ path: 'e2e/.evidence/<feature>.png', fullPage: true })`.
-   - **Never weaken a Journey to pass**: if missing seed data or a broken precondition blocks the flow, record the cause under `## Gotchas` in `e2e/features/<feature>.md` and report the failure.
+   - **Never weaken a Journey to pass**: if missing seed data, a separate backend/DB service, or an unguarded native/IPC call causes `ERR_CONNECTION_REFUSED`, `502`, or runtime `console.error`s, record the missing prerequisite or real bug under `## Gotchas` in `e2e/features/<feature>.md` and fail rather than silencing `console.error` checks.
 4. **Execute and verify**:
    - Run `npx playwright test e2e/<feature>.spec.ts`.
    - Confirm the test passes and `e2e/.evidence/<feature>.png` exists on disk.

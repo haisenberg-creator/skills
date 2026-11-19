@@ -21,11 +21,30 @@ A canonical state-machine label applied to an **Issue** during triage (e.g. `nee
 **Design Intelligence Database**:
 The offline collection of CSV datasets (`styles.csv`, `colors.csv`, `typography.csv`, `ux-guidelines.csv`, `stacks/`) and BM25 search scripts (`search.py`) vendored into `pro-max-design-system` from `nextlevelbuilder/ui-ux-pro-max-skill`.
 
+**Verification tier**:
+How much proof a change owes: `tier 1 (runtime-only)`, `tier 2 (regression)`, or `tier 3 (seam)`. It sets the **Test budget**.
+_Avoid_: test level, verify mode
+
+**Test budget**:
+The maximum number of new unit or integration tests a **Verification tier** allows: 0, 1, or 1 to 3. **Journeys** do not count against it.
+
+**Feature map**:
+An app's directory of user-facing features (`e2e/features/`), one markdown file per feature. Each entry states how a user reaches the feature, how to drive it with Playwright, and what observable end state proves it works.
+
+**Journey**:
+A Playwright script (`e2e/<feature>.spec.ts`) that drives one **Feature map** entry through the real UI, asserts zero console and page errors, and captures screenshot proof in `e2e/.evidence/`. It is the only accepted proof that work is done.
+_Avoid_: verification check, smoke test, e2e test
+
+**Guardrail baseline**:
+The shared ESLint rules in `skills/custom/setup-guardrails` copied into each app. Every rule's error message names the fix.
+
 ## Relationships
 
 - An **Issue tracker** holds many **Issues**
 - An **Issue** carries one **Triage role** at a time
 - A **Decision ticket** is an **Issue** (a child of a `wayfinder:map`)
+- Each **Feature map** entry has one **Journey**
+- A ticket's `Verify:` line names one **Verification tier** and one **Journey**
 
 ## Flagged ambiguities
 

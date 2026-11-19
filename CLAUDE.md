@@ -5,6 +5,9 @@ Skills are organized into bucket folders under `skills/`:
 - `misc/`: kept around but rarely used, not promoted
 - `in-progress/`: beta: public on purpose, feedback wanted, not shipped in the plugin
 - `deprecated/`: no longer used
+- `custom/` and `design/`: fork-only buckets for personal workflows
+
+Fork exemption ([ADR 0003](./.agents/adr/0003-fork-changes-in-place-without-docs-sync.md)): skills in `skills/custom/` and `skills/design/`, plus fork-only edits to upstream skills in `engineering/` or `productivity/`, skip updating `docs/`, `README.md`, `.claude-plugin/plugin.json`, and `ask-matt`.
 
 Every skill in `engineering/` or `productivity/` (the **promoted** buckets) must have a reference in the top-level `README.md` and an entry in `.claude-plugin/plugin.json`'s `skills` array (the Claude Code plugin ships exactly the promoted set). Skills in `misc/`, `in-progress/`, and `deprecated/` must not appear in either.
 

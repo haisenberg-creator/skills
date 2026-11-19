@@ -20,15 +20,15 @@ The **frontier** is the set of tickets that are not yet "Done" and have no uncom
 
 ### 3. Dispatch a sub-agent
 
-Pick one ticket from the frontier. Read its **Required skills** field. Use your sub-agent tool to spawn a sub-agent with a prompt tailored to those skills:
+Pick one ticket from the frontier. Read its **Required skills** and **Verify** fields. Start every sub-agent with a fresh context window, with a prompt tailored to those skills:
 
 - For standard engineering (`implement`):
 
-  > "Read ticket <ticket-reference>. Create an implementation plan. Then apply the `implement` skill (using TDD, running typechecks, and committing your work). Once the code is committed, report back as Done."
+  > "Read ticket <ticket-reference>. Create an implementation plan. Then apply the `implement` skill (honoring the ticket's `Verify:` tier via `verification-tiers`, running `tdd` within budget for Tiers 2 and 3, running typechecks and lint, verifying the Playwright Journey with `verify-web-app`, and committing your work). Once the code is committed, report back as Done."
 
 - For UI/UX design or polish (`design-taste-frontend`, `emil-design-eng`):
 
-  > "Read ticket <ticket-reference>. Create an implementation plan. Then apply the `design-taste-frontend` skill for layout/styling and `emil-design-eng` for interaction/polish. Skip strict TDD, produce a visual verification step instead, and commit your work. Once the code is committed, report back as Done."
+  > "Read ticket <ticket-reference>. Create an implementation plan. Then apply the `design-taste-frontend` skill for layout/styling and `emil-design-eng` for interaction/polish. Honor the ticket's `Verify:` tier via `verification-tiers`, run typechecks and lint, run `verify-web-app` to prove the Playwright Journey and capture screenshot evidence in `e2e/.evidence/`, and commit your work. Once the code is committed, report back as Done."
 
 - For exploratory design (`prototype`):
   > "Read ticket <ticket-reference>. Apply the `prototype` skill to build a throwaway prototype. Do not write production code. Report back as Done when the prototype is ready for user review."

@@ -37,9 +37,11 @@ Break the work into **tracer bullet** tickets.
 
 Give each ticket its **blocking edges**: the other tickets that must complete before it can start. A ticket with no blockers can start immediately.
 
+Call the Skill tool with "verification-tiers" and assign each ticket a **Verify** line naming its verification tier (`tier 1 (runtime-only)`, `tier 2 (regression)`, or `tier 3 (seam)`), its public test `seam` (for tiers 2 and 3), its target Playwright `journey`, and its observable `proof`.
+
 **Wide refactors and exploratory design are exceptions to vertical slicing.**
 
-A **wide refactor** is one mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the whole codebase, so a single edit breaks thousands of call sites at once and no vertical slice can land green. Don't force it into a tracer bullet; sequence it as **expand–contract**. First expand: add the new form beside the old so nothing breaks. Then migrate the call sites over in batches sized by blast radius (per package, per directory), each batch its own ticket blocked by the expand, keeping CI green batch to batch because the old form still exists. Finally contract: delete the old form once no caller remains, in a ticket blocked by every migrate batch. When even the batches can't stay green alone, keep the sequence but let them share an integration branch that all block a final integrate-and-verify ticket; green is promised only there.
+A **wide refactor** is one mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the whole codebase, so a single edit breaks thousands of call sites at once and no vertical slice can land green. Don't force it into a tracer bullet; sequence it as **expand-contract**. First expand: add the new form beside the old so nothing breaks. Then migrate the call sites over in batches sized by blast radius (per package, per directory), each batch its own ticket blocked by the expand, keeping CI green batch to batch because the old form still exists. Finally contract: delete the old form once no caller remains, in a ticket blocked by every migrate batch. When even the batches can't stay green alone, keep the sequence but let them share an integration branch that all block a final integrate-and-verify ticket; green is promised only there.
 
 For **exploratory UI/UX design**, output a **throwaway prototype** ticket. The subsequent vertical slices (the actual production implementations) are then blocked by the completion and user approval of that prototype ticket.
 
@@ -50,6 +52,7 @@ Present the proposed breakdown as a numbered list. For each ticket, show:
 - **Title**: short descriptive name
 - **Blocked by**: which other tickets (if any) must complete first
 - **What it delivers**: the end-to-end behaviour this ticket makes work
+- **Verify**: the verification tier, test seam (for tiers 2 and 3), journey, and observable browser proof
 
 Ask the user:
 
@@ -80,6 +83,8 @@ Do NOT close or modify any parent issue.
 
 **Required skills:** the recommended agent skills to execute this ticket (e.g., `implement` for standard engineering, `prototype` for exploratory UI, or `design-taste-frontend` and `emil-design-eng` for UI/UX interaction/polish).
 
+**Verify:** tier <1|2|3> (<runtime-only|regression|seam>) · seam: <public interface, omit for tier 1> · journey: <feature> · proof: <observable end state>
+
 **Status:** ready-for-agent
 
 - [ ] Acceptance criterion 1
@@ -109,6 +114,10 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 ## Required skills
 
 The recommended agent skills to execute this ticket (e.g., `implement` for standard engineering, `prototype` for exploratory UI, or `design-taste-frontend` and `emil-design-eng` for UI/UX interaction/polish).
+
+## Verify
+
+`tier <1|2|3> (<runtime-only|regression|seam>) · seam: <public interface, omit for tier 1> · journey: <feature> · proof: <observable end state>`
 
 </issue-template>
 

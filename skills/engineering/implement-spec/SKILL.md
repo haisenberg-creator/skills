@@ -28,7 +28,8 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 
 4. Use a fresh **implementer subagent** for each ticket, each in its own worktree on its own branch. Each implementer subagent:
    - confirms its worktree is based on the integration branch before starting, and resets onto it if not;
-   - calls the Skill tool with `tdd` to build the ticket;
+   - calls the Skill tool with `verification-tiers` to honor the ticket's `Verify:` tier and test budget, calling `tdd` only for Tiers 2 and 3 at the ticket's pre-agreed `seam:`, and running typechecking and lint regularly;
+   - calls the Skill tool with `verify-web-app` to execute the ticket's Playwright Journey and capture screenshot proof in `e2e/.evidence/`;
    - merges the integration branch tip into its own branch before reporting done
 
 5. Once an **implementer subagent** completes, merge its work to the integration branch with a **merger subagent**.
